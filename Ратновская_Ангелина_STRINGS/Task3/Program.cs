@@ -25,13 +25,10 @@ namespace Task3
 
         static void GetEmails(string str)
         {
-            var pattern = @"[a-zA-Z0-9]+|[_]*@[a-zA-Z0-9][\.][a-zA-Z]{2,6}";
+            var pattern = @"[a-zA-Z0-9][a-zA-Z0-9\._-]*@[a-zA-Z0-9][a-zA-Z0-9_-]*[\.][a-zA-Z0-9]{2,6}";
             Regex reg = new Regex(pattern);
-            var list = new List<string>();
-            foreach (Match match in reg.Matches(str))
-            {
-                list.Add(match.Value);
-            }
+
+            var list = (from Match match in reg.Matches(str) select match.Value).ToList();
 
             foreach (var element in list)
             {
@@ -40,12 +37,23 @@ namespace Task3
             Console.ReadLine();
         }
 
+        static void GetNotation(string str)
+        {
+            var pattern1 = @"\d+";
+            Regex reg1 = new Regex(pattern1);
+            var pattern2 = @"";
+            Regex reg2 = new Regex(pattern2);
+
+            if (reg1.IsMatch(str)) Console.WriteLine("Это число в обычной нотации");
+            if (reg2.IsMatch(str)) Console.WriteLine("Это число в научной нотации");
+            else Console.WriteLine("Это не число в обычной нотации и не число в научной нотации");
+
+            Console.ReadKey();
+
+        }
         static void Main(string[] args)
         {
-            GetEmails("iratnovskaya@gmail.com, iratnogdfgvskaya@gmail.com");
-            //Напишите программу, которая находит и выводит на экран все содержащиеся во введенной с клавиатуры текстовой строке адреса электронной почты. Учесть, что имя почтового ящика может содержать буквы, цифры, точку, дефис и знак подчеркивания, 
-            //    причем первым и последним символами могут быть только буквы или цифры. Для имен поддоменов действуют те же самые правила, но точка допустимой не является. Имя домена первого уровня может состоять только из букв в количестве от 2 до 6.
-            
+            GetNotation("5435");
         }
     }
 }
