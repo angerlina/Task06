@@ -41,19 +41,27 @@ namespace Task3
         {
             var pattern1 = @"\d+";
             Regex reg1 = new Regex(pattern1);
-            var pattern2 = @"";
+            var pattern2 = @"\d+\.\d+e\d+";
             Regex reg2 = new Regex(pattern2);
 
-            if (reg1.IsMatch(str)) Console.WriteLine("Это число в обычной нотации");
+            if (reg1.IsMatch(str) && !reg2.IsMatch(str)) Console.WriteLine("Это число в обычной нотации");
+
             if (reg2.IsMatch(str)) Console.WriteLine("Это число в научной нотации");
-            else Console.WriteLine("Это не число в обычной нотации и не число в научной нотации");
+
+            if (!reg1.IsMatch(str)&& !reg2.IsMatch(str)) Console.WriteLine("Это не число в обычной нотации и не число в научной нотации");
 
             Console.ReadKey();
+        }
+
+        static void AmountOfTime(string str)
+        {
+            var pattern = @"";
+            Regex reg = new Regex(pattern);
 
         }
         static void Main(string[] args)
         {
-            GetNotation("5435");
+            GetNotation("1.27e2");
         }
     }
 }
